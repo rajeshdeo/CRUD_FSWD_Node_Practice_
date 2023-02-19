@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="container">
+        <h1>Login</h1>
+        <input type="text" id="email" placeholder="Enter Email"/>
+        <input type="password" id="pass" placeholder="Enter Password"/>
+        
+        <button onClick="onLogin()">Login</button>
+    </div>
+</body>
+</html>
+<script>
+const onLogin=()=>{
+    const payload={
+       
+        email:document.getElementById("email").value,
+        pass:document.getElementById("pass").value
+    }
+   // console.log(payload);
+   fetch("https://dizzy-school-uniform-foal.cyclic.app/users/login",{
+    method:"POST",
+    headers:{
+        "Content-type":"application/json",
+    },
+    body:JSON.stringify(payload),
+
+   }).then(res=>res.json())
+   .then(res=>{
+    localStorage.setItem("Token",res.Token);
+    console.log(res)
+    })
+   .catch(err=>console.log(err))
+}
+ 
+
+</script>
